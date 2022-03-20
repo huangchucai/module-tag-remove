@@ -58,57 +58,27 @@ test('Syntax error', t => {
 
 Just like before, the first parameter passed to `error()` is the fixture file name, without the extension.
 
-#### Linting
-
-You can configure `xo` in `xo.config.js`. See [ESLint rules](https://eslint.org/docs/rules/) for options.
-
-#### Coverage
-
-`c8` defaults are used, you may [configure it](https://github.com/bcoe/c8#cli-options--configuration).
-
-#### Releases
-
-`np` also uses defaults, take a look at its [configuration options](https://github.com/sindresorhus/np#config).
-
-> When publishing your first release, leave `"version": "0.0.0"` in `package.json` - you will set it through `np`'s interactive UI.
-
-#### Continuous Integration
-
-GitHub Actions is used for continuous integration, and you can configure it by editing the `.github/workflows/nodejs.yml` file.
-
-### Other notes
-
-- update shield icon URLs at the end of this file
-- edit (or remove) the issue template
-- update `package.json` fields
-- update the `license` file 
-
-_You can delete all of the above text, including the separator below - what follows is some boilerplate for your plugin's `readme.md`._
-
----
-
 ## Introduction
+删除`vite`打包后的部分`script`和移除`nomodule`属性
 
-Describe what your plugin does. 
-
-Optionally add a short before & after example, like so:
 
 Input:
 
 ```html
-<div filter="uppercase">Test</div>
+<script type="module">xxxxx</script>
+<script nomodule id="vite-legacy-polyfill" src="./assets/polyfills-legacy.1b8c3f41.js"></script>
 ```
 
 Output:
 
 ```html
-<div>TEST</div>
+<script id="vite-legacy-polyfill" src="./assets/polyfills-legacy.1b8c3f41.js"></script>
 ```
 
 ## Install
 
 ```
-$ npm i posthtml posthtml-myplugin
+$ npm i posthtml module-tag-remove
 ```
 
 ## Usage
@@ -117,83 +87,7 @@ Provide clear code samples showing how to use the plugin:
 
 ```js
 import posthtml from'posthtml'
-import myplugin from'posthtml-myplugin'
+import removeScript from 'module-tag-remove'
 
-posthtml([
-  myplugin()
-])
-  .process('<div filter="uppercase">Test</div>')
-  .then(result => console.log(result.html))
+let result = posthtml().use(plugin()).process(html, { sync: true }).html
 ```
-
-Result:
-
-```html
-<div>TEST</div>
-```
-
-## Syntax
-
-Most PostHTML plugins use custom HTML syntax, like custom tag names or even custom attributes. If your plugin requires using custom markup, document it here.
-
-For example:
-
-### Tag
-
-Use the `<uppercase>` tag to transform all text inside it:
-
-```html
-<uppercase>Test</uppercase>
-```
-
-The tag is removed in the output.
-
-Result:
-
-```html
-TEST
-```
-
-### Attribute
-
-You can use a filter by calling it as the value of the `filter` attribute:
-
-```html
-<div filter="uppercase">Test</div>
-```
-
-The `filter` attribute is removed in the output.
-
-Result:
-
-```html
-<div>TEST</div>
-```
-
-## Options
-
-If your plugin can be configured through options, explain what they do and how to use them. Make sure to specify what the defaults are.
-
-For example:
-
-### `only`
-
-Type: `array`\
-Default: `[]`
-
-Array of filter names to use. All other filters will be disabled.
-
-By default, this is set to an empty array, which means that all filters can be used. 
-
-## 3<sup>rd</sup> parties
-
-If your plugin depends on third party libraries that require configuration, explain here what the user needs to do.
-
-[npm]: https://www.npmjs.com/package/posthtml
-[npm-version-shield]: https://img.shields.io/npm/v/posthtml.svg
-[npm-stats]: http://npm-stat.com/charts.html?package=posthtml
-[npm-stats-shield]: https://img.shields.io/npm/dt/posthtml.svg
-[github-ci]: https://github.com/posthtml/posthtml-plugin-starter/actions/workflows/nodejs.yml
-[github-ci-shield]: https://github.com/posthtml/posthtml-plugin-starter/actions/workflows/nodejs.yml/badge.svg
-[license]: ./license
-[license-shield]: https://img.shields.io/npm/l/posthtml.svg
