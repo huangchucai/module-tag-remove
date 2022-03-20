@@ -6,13 +6,13 @@
   [![Version][npm-version-shield]][npm]
   [![Build][github-ci-shield]][github-ci]
   [![License][license-shield]][license]
-  [![Downloads][npm-stats-shield]][npm-stats]
 </div>
 
 ### About
+在打包为离线包的情况下，使用`@vitejs/plugin-legacy`后，`script`标签包含了`module`属性和`nomodule`
+属性，但是`type = module`的情况下，不能支持本地文件路径，所以直接打开会报错。
 
-This is a starter project for PostHTML plugins.
-
+删除掉带有`type=module`的`script`标签，同时我们要去掉`script`的`nomodule`的属性，这样兼容传统浏览器的脚本在现代浏览器下也可以执行。
 ```sh
 git clone https://github.com/posthtml/posthtml-plugin-starter.git
 ```
