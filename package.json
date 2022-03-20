@@ -1,13 +1,12 @@
 {
   "name": "module-tag-remove",
   "description": "change vite build",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "author": "huangchucai",
   "bugs": "https://github.com/huangchucai/module-tag-remove/issues",
   "homepage": "https://github.com/huangchucai/module-tag-remove",
   "repository": "posthtml/posthtml-plugin-starter",
-  "type": "module",
   "exports": "./lib/index.js",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
